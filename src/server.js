@@ -1,13 +1,16 @@
 import express from 'express';
-import { connect } from './database';
-import Marketplaces from './models/marketplaceModel';
+import { connect } from './database.js';
+import cors from 'cors';
+import Marketplaces from './models/marketplaceModel.js';
 const server = express();
 const PORT = 5000;
 
 connect();
+server.use(cors())
 server.use(express.json())
 
 server.get('/api/marketplaces', async (req, res) => {
+    console.log('you are in the get route')
     try {
         const marketplaces = await Marketplaces.find({})
         return res.json(marketplaces);
@@ -18,29 +21,23 @@ server.get('/api/marketplaces', async (req, res) => {
 })
 
 server.post('/api/marketplaces', async (req, res) => {
+    console.log('you are in the post route')
+    const theBody = req.body;
     try {
-        const { body } = req;
-        if (!body.name || !body.description || !body.owner) {
-            return res.status(400).send('not good request...');
-        }
-
-        //does marketplace exist?
-        const x = await Marketplaces.findOne({ name: body.name })
-
-
-        const marketplace = new Marketplaces(body);
-        await marketplace.save();
-
-        return res.status(201).json({
-            data: marketplace
-        });
-
+        const newMarketplace = new Marketplaces(theBody);
+        await newMarketplace.save();
+        return res.status(201).send('good job');
 
     } catch (e) {
         console.error(e);
         return res.status(500).send(e);
     }
 })
+
+// PUT
+
+// DELETE
+
 
 
 

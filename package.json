@@ -3,18 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/server.js",
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && babel -d dist src --source-maps",
     "start": "yarn run build && node dist/server.js",
     "start:watch": "yarn run build && nodemon --watch src --exec yarn start",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "yarn run start:watch"
+    "dev": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "dependencies": {
     "@types/jest": "^26.0.14",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "jest": "^26.4.2",
     "mongodb": "^3.6.2",
