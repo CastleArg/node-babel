@@ -6,5 +6,5 @@ const schema = new Schema({
   
     admins: []
 })
-
+======
 export default mongoose.model('Marketplaces', schema, 'marketplaces')
