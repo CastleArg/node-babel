@@ -8,7 +8,7 @@ const PORT = 5000;
 connect();
 server.use(cors())
 server.use(express.json())
-
+// hi everybody!
 server.get('/api/marketplaces', async (req, res) => {
     console.log('you are in the get route')
     try {
