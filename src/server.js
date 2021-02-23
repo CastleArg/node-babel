@@ -4,7 +4,7 @@ import cors from 'cors';
 import Marketplaces from './models/marketplaceModel.js';
 const server = express();
 const PORT = 5000;
-
+// another great change
 connect();
 server.use(cors())
 server.use(express.json())
