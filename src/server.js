@@ -2,7 +2,7 @@ import express from 'express';
 import { connect } from './database.js';
 import cors from 'cors';
 import Marketplaces from './models/marketplaceModel.js';
-const server = express();
+
 const PORT = 5000;
 
 connect();
