@@ -1,14 +1,14 @@
 import express from 'express';
 import { connect } from './database.js';
-import cors from 'cors';
+import cors from 'cors';;
 import Marketplaces from './models/marketplaceModel.js';
-const server = express();
+
 const PORT = 5000;
 // another great change
 connect();
 server.use(cors())
 server.use(express.json())
-
+// hi everybody!
 server.get('/api/marketplaces', async (req, res) => {
     console.log('you are in the get route')
     try {
