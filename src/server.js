@@ -3,6 +3,8 @@ import { connect } from './database.js';
 import morgan from 'morgan';
 import cors from 'cors';
 import marketplaceRouter from './routers/marketplaceRouter.js';
+import Marketplace from './models/marketplaceModel.js';
+const router = express.Router();
 const server = express();
 const PORT = 5000;
 // another great change
@@ -11,7 +13,7 @@ connect();
 server.use(cors())
 server.use(express.json())
 
-server.use('/api/marketplaces', marketplaceRouter)
+server.use('/api/marketplaces', marketplaceRouter(router, Marketplace))
 
 server.use('*', (req, res) => {
     return res.status(404).json({ error: 'not found!!' });
