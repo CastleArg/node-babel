@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import cors from 'cors';
 import marketplaceRouter from './routers/marketplaceRouter.js';
 import Marketplace from './models/marketplaceModel.js';
+import authRouter from './routers/authRouter.js';
 const router = express.Router();
 const server = express();
 const PORT = 5000;
@@ -13,6 +14,7 @@ connect();
 server.use(cors())
 server.use(express.json())
 
+server.use('/auth', authRouter)
 server.use('/api/marketplaces', marketplaceRouter(router, Marketplace))
 
 server.use('*', (req, res) => {
