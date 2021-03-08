@@ -1,8 +1,12 @@
 const getRouter = (router, Marketplaces) => {
     router.get('/', async (req, res, next) => {
         console.log('you are in the get route')
+        // determine who the currently logged in person is
+        const usernameOfPersonWHoMadeTHisRequest = req.username;
+
         try {
-            const marketplaces = await Marketplaces.find({})
+            // get only the marketplaces where that person is the owner
+            const marketplaces = await Marketplaces.find({ owner: usernameOfPersonWHoMadeTHisRequest })
             return res.json(marketplaces);
         } catch (e) {
             console.error(e);
@@ -29,6 +33,8 @@ const getRouter = (router, Marketplaces) => {
             const { id } = req.params;
             console.log(id);
 
+            const usernameOfPersonWHoMadeTHisRequest = req.username;
+
             if (!id) {
                 return res.status(400).json({ error: 'Marketplace id parameter required' });
             }
@@ -41,6 +47,15 @@ const getRouter = (router, Marketplaces) => {
             ) {
                 return res.status(400).json({ error: 'Marketplace name, description, owner required' });
             }
+            // find marketplaceby id
+
+
+            // is this person the owner? 
+
+            if(usernameOfPersonWHoMadeTHisRequest != existingMarketplace.owner) {
+                return 401
+            }
+            //
             const marketplace = await Marketplaces.findByIdAndUpdate(id, body)  /// , { new: true } .lean();
             delete marketplace.__v;
             console.log(marketplace);

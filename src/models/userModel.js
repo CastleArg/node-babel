@@ -8,7 +8,8 @@ const schema = new Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    groups: []
+    groups: [],
+    token: { type: String, unique: true }
 })
 
 export default mongoose.model('Users', schema, 'users')
